@@ -1,0 +1,28 @@
+.env
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files (VERY IMPORTANT: Keep state files out of git!)
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files, which are likely to contain sensitive data
+# such as passwords, private keys, and other secrets.
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are usually used to override resources locally
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore the plan output of command: terraform plan -out=tfplan
+*tfplan*
+
+*public-ip.txt*
