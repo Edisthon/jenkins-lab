@@ -1,0 +1,11 @@
+---
+- name: Setup Base Dependencies (Docker)
+  hosts: all
+  become: true
+  roles:
+    - docker
+- name: Start the Jenkins Controller
+  hosts: jenkins_servers
+  become: true
+  roles:
+    - jenkins_setup
