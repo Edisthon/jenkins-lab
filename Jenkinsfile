@@ -19,21 +19,17 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                dir('app') {
-                    sh '''
-                    docker run --rm -v ${WORKSPACE}/app:/app -w /app python:3.9-slim bash -c "pip install -r requirements.txt && pytest test_app.py"
-                    '''
-                }
-            }
-        }
-
         stage('Docker Build') {
             steps {
                 dir('app') {
                     sh "docker build -t ${IMAGE_TAG} -t ${LATEST_TAG} ."
                 }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh "docker run --rm ${IMAGE_TAG} bash -c 'pytest test_app.py'"
             }
         }
 
