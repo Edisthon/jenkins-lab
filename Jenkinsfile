@@ -29,7 +29,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh "docker run --rm ${IMAGE_TAG} bash -c 'pytest test_app.py'"
+                sh "docker run --rm --entrypoint bash ${IMAGE_TAG} -c 'pytest test_app.py'"
             }
         }
 
