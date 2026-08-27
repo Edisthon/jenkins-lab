@@ -6,7 +6,7 @@
 
 ## Infrastructure Architecture
 
-The following diagram illustrates the flow of our CI/CD pipeline, from pushing code to deploying the containerized application.
+The following diagram illustrates the flow of our CI/CD pipeline, from pushing code to deploying the containerized application.ss
 
 ![alt text](./screenshots/cicd_architecture.png)
 

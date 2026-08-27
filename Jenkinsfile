@@ -51,7 +51,7 @@ pipeline {
             steps {
                 sshagent(['prod-ssh-key']) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ec2-user@${params.PROD_SERVER_IP} '
+                    ssh -o StrictHostKeyChecking=no ec2-user@${env.PROD_SERVER_IP} '
                         docker stop ${APP_NAME} || true
                         docker rm ${APP_NAME} || true
                         docker pull ${LATEST_TAG}
