@@ -18,11 +18,13 @@ data "aws_ami" "amazon_linux" {
 
 resource "aws_instance" "jenkins_instance" {
 
-    instance_type = var.instance_type
-    ami = data.aws_ami.amazon_linux.id
+    instance_type               = var.instance_type
+    ami                         = data.aws_ami.amazon_linux.id
     associate_public_ip_address = true
-    key_name = var.key_pair
-    vpc_security_group_ids = [ var.sg_id ]
+    key_name                    = var.key_pair
+    subnet_id                   = var.subnet_id
+    vpc_security_group_ids      = [ var.sg_id ]
+    iam_instance_profile        = var.iam_instance_profile
     tags = {
       name = var.ec2_name
     }
