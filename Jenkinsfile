@@ -19,17 +19,21 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Unit Tests') {
             steps {
                 dir('app') {
-                    sh "docker build -t ${IMAGE_TAG} -t ${LATEST_TAG} ."
+                    // Builds only the test stage. If pytest fails, the pipeline stops here!
+                    sh "docker build --target test -t ${APP_NAME}-test:latest ."
                 }
             }
         }
 
-        stage('Test') {
+        stage('Docker Build (Production)') {
             steps {
-                sh "docker run --rm --entrypoint bash ${IMAGE_TAG} -c 'pytest test_app.py'"
+                dir('app') {
+                    // Builds the final production image without test dependencies
+                    sh "docker build --target production -t ${IMAGE_TAG} -t ${LATEST_TAG} ."
+                }
             }
         }
 
