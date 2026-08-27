@@ -58,3 +58,4 @@ module "monitoring_server" {
   key_pair      = module.ssh_key.key_name 
   depends_on    = [ module.network ]
 }
+
