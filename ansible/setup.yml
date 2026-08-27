@@ -4,8 +4,21 @@
   become: true
   roles:
     - docker
+
 - name: Start the Jenkins Controller
   hosts: jenkins_servers
   become: true
   roles:
     - jenkins_setup
+
+- name: Setup App Server Monitoring and Logging
+  hosts: prod_servers
+  become: true
+  roles:
+    - prod_setup
+
+- name: Start Prometheus and Grafana
+  hosts: monitoring_servers
+  become: true
+  roles:
+    - monitoring_setup
