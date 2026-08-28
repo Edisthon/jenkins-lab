@@ -10,6 +10,7 @@
     dest: /usr/local/bin
     remote_src: yes
     extra_opts: [--strip-components=1]
+    creates: /usr/local/bin/node_exporter
 
 - name: Create Node Exporter systemd service file
   copy:

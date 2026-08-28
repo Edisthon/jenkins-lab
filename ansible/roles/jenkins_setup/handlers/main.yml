@@ -1,0 +1,5 @@
+---
+- name: Restart Jenkins
+  ansible.builtin.command: /usr/local/bin/docker-compose up -d
+  args:
+    chdir: /opt/jenkins

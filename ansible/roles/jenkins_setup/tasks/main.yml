@@ -10,8 +10,4 @@
     src: docker-compose.yml
     dest: /opt/jenkins/docker-compose.yml
     mode: '0644'
-
-- name: Start Jenkins using Docker Compose
-  ansible.builtin.command: /usr/local/bin/docker-compose up -d
-  args:
-    chdir: /opt/jenkins
+  notify: Restart Jenkins
