@@ -52,10 +52,9 @@ module "prod_server" {
 module "monitoring_server" {
   source        = "../../modules/compute"
   ec2_name      = "Monitoring-Server"
-  instance_type = "t3.micro"
+  instance_type = "t3.small"
   subnet_id     = module.network.mgmt_subnet_id
   sg_id         = module.network.monitoring_sg_id
   key_pair      = module.ssh_key.key_name 
   depends_on    = [ module.network ]
 }
-
