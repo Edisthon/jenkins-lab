@@ -1,4 +1,4 @@
-# Project 6: Comprehensive Monitoring and Observability Report
+# Module 8: Comprehensive Monitoring and Observability Report
 
 ![Infrastructure Diagram](./screenshots/infrastructure_diagram.png)
 
