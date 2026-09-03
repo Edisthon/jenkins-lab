@@ -3,3 +3,8 @@
   systemd:
     name: docker
     state: restarted
+
+- name: restart fluent-bit
+  systemd:
+    name: fluent-bit
+    state: restarted

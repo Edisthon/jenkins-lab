@@ -22,3 +22,9 @@
   become: true
   roles:
     - monitoring_setup
+
+- name: Start EFK Stack
+  hosts: logging_servers
+  become: true
+  roles:
+    - logging_setup

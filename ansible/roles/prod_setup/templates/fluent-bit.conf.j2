@@ -1,0 +1,35 @@
+[SERVICE]
+    Flush        1
+    Daemon       Off
+    Log_Level    info
+    Parsers_File parsers.conf
+
+[INPUT]
+    Name              tail
+    Path              /var/lib/docker/containers/*/*.log
+    Parser            docker
+    Tag               docker.*
+    Refresh_Interval  5
+
+[FILTER]
+    Name         parser
+    Match        docker.*
+    Key_Name     log
+    Parser       json
+    Reserve_Data On
+
+[OUTPUT]
+    Name            cloudwatch_logs
+    Match           *
+    region          eu-west-1
+    log_group_name  flask-app-logs
+    log_stream_prefix fluent-bit-
+    auto_create_group On
+
+[OUTPUT]
+    Name            es
+    Match           *
+    Host            {{ groups['logging_servers'][0] }}
+    Port            9200
+    Index           flask-app-logs
+    Suppress_Type_Name On

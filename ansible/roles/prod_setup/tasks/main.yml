@@ -35,16 +35,20 @@
     enabled: yes
     daemon_reload: yes
 
-- name: Configure Docker daemon for CloudWatch logs
-  copy:
-    dest: /etc/docker/daemon.json
-    content: |
-      {
-        "log-driver": "awslogs",
-        "log-opts": {
-          "awslogs-region": "eu-west-1",
-          "awslogs-group": "flask-app-logs",
-          "awslogs-create-group": "true"
-        }
-      }
-  notify: restart docker
+- name: Install FluentBit via official script
+  shell: curl https://raw.githubusercontent.com/fluent/fluent-bit/master/install.sh | sh
+  args:
+    creates: /opt/fluent-bit/bin/fluent-bit
+
+- name: Configure FluentBit for CloudWatch and EFK
+  template:
+    src: fluent-bit.conf.j2
+    dest: /etc/fluent-bit/fluent-bit.conf
+  notify: restart fluent-bit
+
+- name: Start and enable FluentBit
+  systemd:
+    name: fluent-bit
+    state: started
+    enabled: yes
+    daemon_reload: yes

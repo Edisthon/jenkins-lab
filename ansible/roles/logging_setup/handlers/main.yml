@@ -1,0 +1,5 @@
+---
+- name: restart logging stack
+  command: docker-compose restart
+  args:
+    chdir: /opt/logging

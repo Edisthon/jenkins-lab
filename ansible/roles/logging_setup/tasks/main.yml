@@ -1,0 +1,24 @@
+---
+- name: Increase vm.max_map_count for Elasticsearch
+  sysctl:
+    name: vm.max_map_count
+    value: '262144'
+    state: present
+    reload: yes
+
+- name: Ensure /opt/logging directory exists
+  file:
+    path: /opt/logging
+    state: directory
+    mode: '0755'
+
+- name: Copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /opt/logging/docker-compose.yml
+  notify: restart logging stack
+
+- name: Start EFK Logging Stack
+  command: docker-compose up -d
+  args:
+    chdir: /opt/logging
