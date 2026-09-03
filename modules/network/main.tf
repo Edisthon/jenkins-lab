@@ -138,9 +138,7 @@ resource "aws_security_group" "app_sg" {
     from_port   = 9100
     to_port     = 9100
     protocol    = "tcp"
-    # To be extremely secure, this should only be accessed by the Monitoring SG, but we haven't created it yet in the file order.
-    # We will use VPC CIDR to allow internal VPC scraping.
-    cidr_blocks = [var.vpc_cidr]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {

@@ -4,8 +4,10 @@ import json
 import logging
 import random
 import requests
-from flask import Flask, jsonify, request
-from prometheus_client import Counter, Histogram, generate_latest
+from flask import Flask, jsonify, request, Response
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+
+# ... (I need to be careful with replace_file_content if I don't know the exact lines, let me view app.py first)
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
@@ -89,7 +91,7 @@ def after_request(response):
 
 @app.route('/metrics')
 def metrics():
-    return generate_latest(), 200
+    return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
 
 # ---------------------------------------------------------------------------
 # 5. Application Routes (Mock E-Commerce)
