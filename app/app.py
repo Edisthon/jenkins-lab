@@ -20,7 +20,7 @@ from opentelemetry.instrumentation.requests import RequestsInstrumentor
 # 1. OpenTelemetry Initialization
 # ---------------------------------------------------------------------------
 # Tell OTel to send traces to the Jaeger OTLP receiver
-otlp_endpoint = os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT", "http://3.254.59.76:4317")
+otlp_endpoint = os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT", "http://3.250.99.232:4317")
 resource = Resource.create({"service.name": "flask-ecommerce-api"})
 provider = TracerProvider(resource=resource)
 processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=otlp_endpoint, insecure=True))
