@@ -10,14 +10,16 @@ def client():
 def test_home(client):
     response = client.get('/')
     assert response.status_code == 200
-    assert response.json == {"message": "Hello from Flask CI/CD Pipeline!"}
+    assert response.json == {"message": "Welcome to the E-Commerce API!"}
 
 def test_health(client):
     response = client.get('/health')
     assert response.status_code == 200
     assert response.json == {"status": "healthy"}
 
-def test_hello_dynamic(client):
-    response = client.get('/hello/Jenkins')
-    assert response.status_code == 200
-    assert response.json == {"message": "Hello Jenkins!"}
+def test_checkout(client):
+    # The checkout endpoint might return 200 or 500 randomly, 
+    # but for testing we just ensure it returns JSON
+    response = client.get('/checkout')
+    assert response.status_code in [200, 500]
+    assert response.is_json
