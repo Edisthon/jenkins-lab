@@ -17,3 +17,13 @@ output "monitoring_server_ip" {
     value       = module.monitoring_server.ec2_instance_ip
     description = "Public IP of the Monitoring Server (Prometheus/Grafana)"
 }
+
+output "logging_server_ip" {
+    value       = module.logging_server.ec2_instance_ip
+    description = "Public IP of the Logging Server (EFK)"
+}
+
+output "logging_server_private_ip" {
+    value       = module.logging_server.ec2_instance_private_ip
+    description = "Private IP of the Logging Server (EFK)"
+}

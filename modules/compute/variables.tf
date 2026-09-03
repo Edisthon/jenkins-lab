@@ -28,3 +28,9 @@ variable "iam_instance_profile" {
     type        = string
     default     = null
 }
+
+variable "ami_image" {
+
+    default = "ami-00b98fcf187a433fa"
+  
+}

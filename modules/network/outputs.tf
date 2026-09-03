@@ -21,3 +21,7 @@ output "app_sg_id" {
 output "monitoring_sg_id" {
   value = aws_security_group.monitoring_sg.id
 }
+
+output "logging_sg_id" {
+  value = aws_security_group.logging_sg.id
+}

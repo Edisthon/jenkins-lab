@@ -58,3 +58,13 @@ module "monitoring_server" {
   key_pair      = module.ssh_key.key_name 
   depends_on    = [ module.network ]
 }
+
+module "logging_server" {
+  source        = "../../modules/compute"
+  ec2_name      = "Logging-Server-EFK"
+  instance_type = "t3.medium"
+  subnet_id     = module.network.mgmt_subnet_id
+  sg_id         = module.network.logging_sg_id
+  key_pair      = module.ssh_key.key_name 
+  depends_on    = [ module.network ]
+}
