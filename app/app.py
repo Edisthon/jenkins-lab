@@ -96,6 +96,41 @@ def metrics():
 # ---------------------------------------------------------------------------
 # 5. Application Routes (Mock E-Commerce)
 # ---------------------------------------------------------------------------
+
+INVENTORY = {
+    "1": {"name": "Laptop", "price": 999.99},
+    "2": {"name": "Smartphone", "price": 499.99},
+    "3": {"name": "Headphones", "price": 149.99}
+}
+
+@app.route('/item/<item_id>')
+def get_item(item_id):
+    logger.info(f"Fetching item details for {item_id}")
+    item = INVENTORY.get(item_id)
+    if not item:
+        logger.warning(f"Item {item_id} not found!")
+        return jsonify(error="Item not found"), 404
+    return jsonify(item=item), 200
+
+@app.route('/cart', methods=['POST'])
+def add_to_cart():
+    logger.info("Adding item to cart")
+    data = request.get_json()
+    
+    if not data or not data.get("item_id"):
+        logger.error("Missing item_id in request payload")
+        return jsonify(error="Bad Request: Missing item_id"), 400
+        
+    item_id = str(data.get("item_id"))
+    item = INVENTORY.get(item_id)
+    
+    if not item:
+        logger.warning(f"Cannot add non-existent item {item_id} to cart")
+        return jsonify(error="Item not found"), 404
+        
+    logger.info(f"Successfully added {item['name']} to cart")
+    return jsonify(message="Item added to cart successfully!", cart_total=item['price']), 201
+
 @app.route('/')
 def home():
     logger.info("Home page accessed")
