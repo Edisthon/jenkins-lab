@@ -19,7 +19,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
   jaeger:
-    image: jaegertracing/jaeger:latest
+    image: jaegertracing/all-in-one:latest
     container_name: jaeger
     restart: unless-stopped
     ports:
