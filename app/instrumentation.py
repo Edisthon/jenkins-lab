@@ -61,7 +61,7 @@ logging.getLogger('werkzeug').disabled = True
 # ---------------------------------------------------------------------------
 def setup_telemetry(app):
     # Tell OTel to send traces to the OTel Collector receiver (or Jaeger fallback)
-    otlp_endpoint = os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT", "http://3.250.99.232:4317")
+    otlp_endpoint = os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT", "http://localhost:4317")
     resource = Resource.create({"service.name": "flask-ecommerce-api"})
     provider = TracerProvider(resource=resource)
     processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=otlp_endpoint, insecure=True))
