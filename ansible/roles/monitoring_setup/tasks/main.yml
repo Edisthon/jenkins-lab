@@ -21,3 +21,11 @@
     owner: ec2-user
     group: ec2-user
   notify: Restart Monitoring
+
+- name: Copy otel-collector config
+  copy:
+    src: otel-collector-config.yaml
+    dest: /home/ec2-user/monitoring/otel-collector-config.yaml
+    owner: ec2-user
+    group: ec2-user
+  notify: Restart Monitoring
