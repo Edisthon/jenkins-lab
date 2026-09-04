@@ -24,5 +24,13 @@ services:
     restart: unless-stopped
     ports:
       - "16686:16686" # UI
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector
+    restart: unless-stopped
+    ports:
       - "4317:4317"   # OTLP gRPC
       - "4318:4318"   # OTLP HTTP
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol/config.yaml

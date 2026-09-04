@@ -55,7 +55,7 @@ pipeline {
                         docker stop ${APP_NAME} || true
                         docker rm ${APP_NAME} || true
                         docker pull ${LATEST_TAG}
-                        docker run -d --name ${APP_NAME} -p 80:80 ${LATEST_TAG}
+                        docker run -d --name ${APP_NAME} -p 80:80 -e OTEL_EXPORTER_OTLP_ENDPOINT="http://${env.MONITORING_SERVER_IP}:4317" ${LATEST_TAG}
                         docker image prune -f
                     '
                     """
